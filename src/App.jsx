@@ -1,33 +1,30 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Square } from './components/Square'
+import { Input } from './components/Input';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const wordList = ['apple', 'train', 'react', 'hello', 'world', 'peace', 'water', 'dance', 'study', 'happy'];
+
+  const [word, setWord] = useState(() => {
+      const randomWord = Math.floor(Math.random() * wordList.length); 
+      return wordList[randomWord].split(''); 
+  });
+
+  const squares = word.map((letter, index) => (
+    <Square key={index}>
+      {letter}
+    </Square>
+  ))
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>jueguito del ahorcao</h1>
+      <div className='squares'>
+        {squares}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
     </>
   )
 }
